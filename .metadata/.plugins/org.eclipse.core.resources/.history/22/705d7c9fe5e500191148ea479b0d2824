@@ -1,0 +1,7 @@
+package vanguardamanager.display;
+
+import javax.swing.JOptionPane;
+
+public class UserInterface {
+
+}

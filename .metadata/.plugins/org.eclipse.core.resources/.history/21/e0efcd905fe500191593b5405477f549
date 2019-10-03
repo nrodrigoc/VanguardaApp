@@ -1,0 +1,32 @@
+package gerenciadordefila;
+
+import java.util.Scanner;
+
+public class Launcher {
+	
+	public static void main(String[] args) {
+		Contador fila = new Contador();
+		
+		fila.iniciarFila();
+		
+		while(fila.isOpen()) {
+			
+			Scanner input = new Scanner(System.in);
+			String s = input.toString();
+			s.toLowerCase();
+			switch(s) {
+				case "add": fila.adicionarPessoa(); break;
+				case "proximo": fila.proximaPessoa(); break;
+				case "atual": fila.getFichaAtual();
+		
+			
+			}
+			
+			
+			
+		}
+		
+		System.out.println("Fim do programa!");
+		
+	}
+}

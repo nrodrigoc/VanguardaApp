@@ -1,0 +1,52 @@
+package vanguardamanager;
+
+import javax.swing.UIManager;
+
+public class Caixa implements Runnable{
+
+	private UIManager uiManager;
+	private ObjectManager objectManager;
+	private Contador fila;
+	
+	private boolean rodando;
+	
+	private Handler handler;
+	
+	public Caixa() {
+		rodando = true;
+		objectManager = new ObjectManager(handler);
+		fila = objectManager.getFila();
+	}
+	
+	public void run() {
+		
+		uiManager = new UIManager();
+		
+		fila.iniciarFila();
+		
+		while(rodando) {
+			System.out.println("Tamanho atual da fila: " + fila.getQueueSize());
+			System.out.println("Ficha atual: " + fila.getFichaAtual());
+			
+			/*Scanner input = new Scanner(System.in);*/
+			String s = GUI.getCommand();
+			
+			switch(s.toLowerCase()) {
+				case "add": fila.adicionarPessoa(); break;
+				case "prox": fila.proximaPessoa(); break;
+				case "fechar": fila.fecharFila(); break;
+				default: break;
+			
+			}	
+			
+		}
+		System.out.println("Fim do programa!");
+		
+	}
+	
+	public void fecharCaixa() {
+		rodando = false;
+	}
+	
+
+}

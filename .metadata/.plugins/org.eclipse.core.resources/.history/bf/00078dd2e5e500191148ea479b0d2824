@@ -1,0 +1,16 @@
+package vanguardamanager.display;
+
+import javax.swing.JOptionPane;
+
+public class UserInterface {
+	
+	private String mensagem;
+	
+	public UserInterface() {
+		this.mensagem = "Cala a boca rapariga";
+	}
+	
+	
+	
+	
+}

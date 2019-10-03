@@ -1,0 +1,53 @@
+package vanguardamanager;
+
+import java.util.ArrayList;
+
+public class Contador{
+	
+	private boolean rodando;
+	
+	private static ArrayList<Integer> fila;
+	private static int fichaAtual;
+	
+	public Contador() {
+		rodando = false;
+		fila = new ArrayList<>();
+		fichaAtual = 0;
+	}
+	
+	public void iniciarFila() {	
+		rodando = true;
+	}
+	
+	public void adicionarPessoa() {
+		fichaAtual++;
+		fila.add(fichaAtual);
+	}
+	
+	public void proximaPessoa() {
+		if(!fila.isEmpty())
+			fila.remove(0);
+	}
+	
+	public int getFichaAtual() {
+		if(fila.isEmpty()) {
+			return 0;
+		}
+		return fila.get(0);
+	}
+	
+	/*Retorna true se o programa nao foi fechado*/
+	public boolean isOpen() {
+		return rodando;
+	}
+	
+	public void fecharFila() {
+		rodando = false;
+	}
+	
+	public int getSize() {
+		return fila.size();
+	}
+	
+	
+}

@@ -1,0 +1,39 @@
+package vanguardamanager;
+
+import java.util.Scanner;
+
+import vanguardamanager.display.UserInterface;
+
+public class Launcher {
+	
+	public static UserInterface interfaceGUI;
+	
+	public static void main(String[] args) {
+		Contador fila = new Contador();
+		interfaceGUI = new UserInterface();
+		
+		fila.iniciarFila();
+		
+		while(fila.isOpen()) {
+			interfaceGUI.mostrarDialog();
+			
+			System.out.println("Tamanho atual da fila: " + fila.getSize());
+			System.out.println("Ficha atual: " + fila.getFichaAtual());
+			
+			/*Scanner input = new Scanner(System.in);*/
+			String s = interfaceGUI.mostrarDialog();
+			
+			switch(s.toLowerCase()) {
+				case "add": fila.adicionarPessoa(); break;
+				case "prox": fila.proximaPessoa(); break;
+				case "fechar": fila.fecharFila(); break;
+				default: break;
+			
+			}	
+			
+		}
+		
+		System.out.println("Fim do programa!");
+		
+	}
+}

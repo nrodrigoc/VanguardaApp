@@ -1,0 +1,20 @@
+package vanguardamanager.display;
+
+import javax.swing.JOptionPane;
+
+public class UserInterface {
+	
+	private String message;
+	
+	public UserInterface() {
+		this.message = "Bom dia meu querido";
+	}
+	
+	public void mostrarDialog() {
+		JOptionPane.showMessageDialog(null, message);
+	}
+	
+	
+	
+	
+}

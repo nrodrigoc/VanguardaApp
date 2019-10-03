@@ -1,0 +1,15 @@
+package gerenciadordefila;
+
+public class Contador{
+	
+	public Contador() {
+		
+	}
+	
+	public void iniciarFila() {
+		
+		
+	}
+	
+	
+}

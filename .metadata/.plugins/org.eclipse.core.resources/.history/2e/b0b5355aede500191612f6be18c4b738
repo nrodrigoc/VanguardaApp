@@ -1,0 +1,19 @@
+package vanguardamanager;
+
+import java.util.Scanner;
+
+import vanguardamanager.display.UIManager;
+
+public class Launcher {
+	
+	public static UIManager GUI;
+	private static ObjectManager objectManager;
+	
+	public static void main(String[] args) {
+		Contador fila = objectManager.getFila();
+		
+		GUI = new UIManager();
+	
+		
+	}
+}

@@ -1,0 +1,14 @@
+package vanguardamanager;
+
+public class ObjectManager {
+	
+	Contador contador;
+	
+	public ObjectManager() {
+		contador = new Contador();
+	}
+	
+	public Contador getContador() {
+		return contador;
+	}
+}

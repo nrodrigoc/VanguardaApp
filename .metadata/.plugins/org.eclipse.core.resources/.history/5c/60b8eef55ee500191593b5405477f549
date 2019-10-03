@@ -1,0 +1,22 @@
+package gerenciadordefila;
+
+import java.util.Scanner;
+
+public class Launcher {
+	
+	public static void main(String[] args) {
+		Contador fila = new Contador();
+		
+		fila.iniciarFila();
+		
+		while(fila.isOpen()) {
+			
+			BufferedReader 
+			
+			
+		}
+		
+		
+		
+	}
+}

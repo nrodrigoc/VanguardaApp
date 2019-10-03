@@ -1,0 +1,26 @@
+package gerenciadordefila;
+
+import java.util.ArrayList;
+
+public class Contador{
+	
+	private static ArrayList<Integer> fila;
+	private int posAtual;
+	
+	
+	public Contador() {
+		fila = new ArrayList<>();
+		posAtual = 1;
+	}
+	
+	public void iniciarFila() {	
+		fila.add(posAtual);
+	}
+	
+	public void adicionarPessoa() {
+		
+	}
+	
+
+	
+}
