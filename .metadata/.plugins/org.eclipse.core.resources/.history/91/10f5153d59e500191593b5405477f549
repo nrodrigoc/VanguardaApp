@@ -1,9 +1,0 @@
-package gerenciadordefila;
-
-public class Contador {
-	
-	public Contador() {
-		
-	}
-	
-}
