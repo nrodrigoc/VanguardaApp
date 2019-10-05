@@ -1,0 +1,53 @@
+package vanguardamanager.display;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+	
+	public class Display extends JFrame{
+		
+	private static final long serialVersionUID = 1L;
+	
+	private final JLabel label1;
+	private final JLabel label2;
+	
+	private int width, height;
+	
+	public Display() {
+		super("Vanguarda's Manager");
+		setLayout(new FlowLayout());
+		label1 = new JLabel("Aqui vai o texto");
+		this.width = 700;
+		this.height = 500;
+		
+		createDisplay();
+		initLabels();
+	}
+
+	private void createDisplay() {
+		setBounds(0, 0, width, height);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
+		Icon v = new ImageIcon(getClass().getResource("/images/visso.png")); 
+		
+		
+		
+		add(label1);
+		//frame.pack();
+	}
+	
+	private void initLabels() {
+		
+		label1.setToolTipText("This is label1"); 
+		//label1.setBounds(30, 0, 80, 80);
+	}
+		
+	
+}

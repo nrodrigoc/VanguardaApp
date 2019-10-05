@@ -7,4 +7,8 @@
 <fullyQualifiedTypeName name="java.lang.InternalError"/>
 <fullyQualifiedTypeName name="java.net.InterfaceAddress"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="vanguardamanager.ObjectManager"/>
+<fullyQualifiedTypeName name="javax.swing.UIManager"/>
+<fullyQualifiedTypeName name="vanguardamanager.display.GerenciadorUI"/>
 </qualifiedTypeNameHistroy>

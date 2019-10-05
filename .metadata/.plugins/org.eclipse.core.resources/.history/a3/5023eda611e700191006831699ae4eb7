@@ -1,0 +1,33 @@
+package vanguardamanager.display;
+
+import javax.swing.JFrame;
+	
+	public class Display {
+	
+	private JFrame frame;
+	
+	private String title;
+	private int width, height;
+	
+	public Display() {
+		title = "Vanguarda's Manager";
+		width = 500;
+		height = 500;
+		
+		createDisplay();
+	}
+
+	private void createDisplay() {
+		frame = new JFrame(title);
+		frame.setBounds(0, 0, 1500, 1500);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
+		frame.pack();
+	}
+	
+		
+	
+}
