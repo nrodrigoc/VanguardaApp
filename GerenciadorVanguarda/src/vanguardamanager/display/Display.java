@@ -70,7 +70,7 @@ public class Display extends JFrame{
 	
 	
 	private void initLabels() {
-		Icon heart = new ImageIcon(getClass().getResource( "heart.png"));
+		//Icon heart = new ImageIcon(getClass().getResource( "heart.png"));
 		TextFieldHandler handler = new TextFieldHandler();
 		textField1.addActionListener(handler); 
 		textField2.addActionListener(handler); 
