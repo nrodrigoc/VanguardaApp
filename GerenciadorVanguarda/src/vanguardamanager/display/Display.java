@@ -43,15 +43,15 @@ public class Display extends JFrame{
 		
 		//label3 = new JLabel();
 		
-		this.width = 260;
-		this.height = 180;
+		this.width = 350;
+		this.height = 100;
 		
 		createDisplay();
 		initLabels();
 	}
 
 	private void createDisplay() {
-		setSize(350, 100);
+		setSize(width, height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
