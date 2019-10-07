@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -19,22 +21,31 @@ public class Display extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private final JTextField textField1;
-	private final JTextField textField2;
+	private final JButton btConfirma;
 	private final JTextField textField3;
 	private final JPasswordField passwordField;
+	private final JMenuBar fila;
+	
 	
 	private int width, height;
 	
 	public Display() {
 		super("Vanguarda's Manager");
-		setLayout(new FlowLayout());
-		textField1 = new JTextField(10); 
+		fila = new JMenuBar();
 		
-		textField2 = new JTextField("Enter text here");
-		add(textField2); 
+		
+		setLayout(null);
+		textField1 = new JTextField(10); 
+		textField1.setBounds(10, 40, 100, 30);
+		
+		btConfirma = new JButton("Confirma");
+		btConfirma.setBounds(120, 40, 100, 30);
+		add(btConfirma); 
 		
 		textField3 = new JTextField("Uneditable text field", 21);
+		textField3.setBounds(10, 80, 120, 20);
 		textField3.setEditable(false);
+		textField3.setToolTipText("Vai tomar no cu tranquilo");
 		
 		passwordField = new JPasswordField("Hidden text");
 		
@@ -43,8 +54,8 @@ public class Display extends JFrame{
 		
 		//label3 = new JLabel();
 		
-		this.width = 350;
-		this.height = 100;
+		this.width = 500;
+		this.height = 300;
 		
 		createDisplay();
 		initLabels();
@@ -60,7 +71,7 @@ public class Display extends JFrame{
 		
 		
 		add(textField1);
-		add(textField2);
+		add(btConfirma);
 		add(textField3);
 		add(passwordField);
 		
@@ -73,7 +84,7 @@ public class Display extends JFrame{
 		//Icon heart = new ImageIcon(getClass().getResource( "heart.png"));
 		TextFieldHandler handler = new TextFieldHandler();
 		textField1.addActionListener(handler); 
-		textField2.addActionListener(handler); 
+		btConfirma.addActionListener(handler); 
 		textField3.addActionListener(handler); 
 		passwordField.addActionListener(handler); 
 		//label1.setBounds(30, 0, 80, 80);
@@ -87,10 +98,10 @@ public class Display extends JFrame{
 			
 			
 			if(e.getSource() == textField1)
-				string = String.format("textField1: %s", e.getActionCommand());
+				string = textField1.getText().equalsIgnoreCase("bomdia") ? "Login certo" : "Login errado";
 			
-			else if(e.getSource() == textField2)
-				string = String.format("textField2: %s", e.getActionCommand());
+			else if(e.getSource() == btConfirma)
+				string = textField1.getText().equalsIgnoreCase("bomdia") ? "Login certo" : "Login errado";
 			
 			else if(e.getSource() == textField3)
 				string = String.format("textField3: %s", e.getActionCommand());
