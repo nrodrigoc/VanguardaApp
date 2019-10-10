@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,7 @@ public class Display extends JFrame{
 	private Container contentPane;
 	private JMenuBar mnBarra;
 	private JMenu mnArquivo, mnExemplos;
-	private JMenuItem 	miSair, miBotao;
+	private JMenuItem 	miSair, miSubmenu, miMain;
 	
 	
 	public Display() {
@@ -41,17 +42,23 @@ public class Display extends JFrame{
 		setTitle("Varguada's App");
 		setBounds(0, 0, 975, 675);
 		contentPane = getContentPane();
+		
+		
+		//Barra de menu
 		mnBarra = new JMenuBar();
 		mnArquivo = new JMenu("Arquivo");
 		mnArquivo.setMnemonic('A');
-		mnExemplos = new JMenu("Exemplos");
-		mnExemplos.setMnemonic('E');
-		Icon heart = new ImageIcon(getClass().getResource("heart.png"));
+		mnExemplos = new JMenu("Teste");
+		mnExemplos.setMnemonic('T');
+		Icon heart = new ImageIcon(getClass().getResource("/images/heart.png"));
 		miSair = new JMenuItem("Sair", heart);
 		miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
-		miBotao = new JMenuItem("Botao");
+		miSubmenu = new JMenuItem("Secundário");
+		miMain = new JMenuItem("Principal");
+		miMain.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 		mnArquivo.add(miSair);
-		mnExemplos.add(miBotao);
+		mnExemplos.add(miMain);
+		mnExemplos.add(miSubmenu);
 		mnBarra.add(mnArquivo);
 		mnBarra.add(mnExemplos);
 		setJMenuBar(mnBarra);
@@ -65,7 +72,8 @@ public class Display extends JFrame{
 
 		EventsHandler handler = new EventsHandler();
 		miSair.addActionListener(handler);
-		miBotao.addActionListener(handler);
+		miMain.addActionListener(handler);
+		miSubmenu.addActionListener(handler);
 	}
 	
 	public static void abrir() {
@@ -86,14 +94,21 @@ public class Display extends JFrame{
 			if(e.getSource() == miSair)
 				System.exit(0);
 			
-			else if(e.getSource() == miBotao) {
-				GUIComponents botao = new GUIComponents();
-				System.out.println("Aqui");
+			else if(e.getSource() == miSubmenu) {
+				GUIComponents submenu = new GUIComponents();
+				System.out.println("Submenu");
 				contentPane.removeAll();
-				contentPane.add(botao);
+				contentPane.add(submenu);
 				contentPane.validate();
 			}
-				
+			
+			else if(e.getSource() == miMain) {
+				GUInterface menu = new GUInterface();
+				System.out.println("Menu");
+				contentPane.removeAll();
+				contentPane.add(menu);
+				contentPane.validate();
+			}
 			
 			
 			//if(e.getSource() == textField1)

@@ -2,6 +2,7 @@ package vanguardamanager;
 
 import vanguardamanager.display.Display;
 import vanguardamanager.gfx.Alertas;
+import vanguardamanager.gfx.Assets;
 
 public class Caixa implements Runnable{
 	
@@ -44,6 +45,7 @@ public class Caixa implements Runnable{
 	}
 	
 	private void init() {
+		Assets.init();
 		Display.abrir();
 	}
 	

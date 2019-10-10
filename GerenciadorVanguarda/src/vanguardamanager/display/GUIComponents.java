@@ -43,7 +43,7 @@ public class GUIComponents extends JPanel{
 	private ButtonGroup radioGroup;
 	
 	private JButton btVerificar, btMarcar, btDesmarcar;
-	private ImageIcon imageIcon1;
+	//private ImageIcon imageIcon1;
 	private JCheckBox ckIngles, ckInformatica;
 	
 	
@@ -54,6 +54,8 @@ public class GUIComponents extends JPanel{
 	}
 	
 	private void inicializarComponentes() {
+		setLayout(null);
+		
 		nome = new JTextField("Nome do Cliente");
 		nome.setHorizontalAlignment(SwingConstants.CENTER);
 		nome.setFont(new Font("Serif", Font.PLAIN, 14));
@@ -82,8 +84,7 @@ public class GUIComponents extends JPanel{
 		btMarcar = new JButton("Marcar");
 		btDesmarcar = new JButton("Desmarcar");
 		
-		setLayout(null);
-		imageIcon1 = new ImageIcon(getClass().getResource("java.png"));
+		//imageIcon1 = new ImageIcon(getClass().getResource("java.png"));
 		
 		nome.setBounds(200, 15, 200, 25);
 		boldJCheckBox.setBounds(240, 45, 50, 25);
