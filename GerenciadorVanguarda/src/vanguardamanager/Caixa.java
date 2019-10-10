@@ -44,7 +44,7 @@ public class Caixa implements Runnable{
 	}
 	
 	private void init() {
-		display = new Display();
+		Display.abrir();
 	}
 	
 	public void fecharCaixa() {
