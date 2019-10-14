@@ -220,12 +220,12 @@ public class GUInterface extends JPanel{
 	    char[] chars = name.toCharArray();
 
 	    for (char c : chars) {
-	        if(!Character.isLetter(c)) {
-	            return false;
+	        if(Character.isLetter(c)) {
+	            return true;
 	        }
 	    }
 
-	    return true;
+	    return false;
 	}
 	
 }
