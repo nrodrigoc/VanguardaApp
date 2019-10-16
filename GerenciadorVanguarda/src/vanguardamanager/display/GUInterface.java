@@ -285,8 +285,11 @@ public class GUInterface extends JPanel{
 			quantidade.get(itemIndex).setVisible(true);
 			valorUnit.get(itemIndex).setVisible(true);
 			itemIndex++;
-		}else
-			adicionar.setVisible(false);
+			
+			if(itemIndex == 3)
+				adicionar.setVisible(false);
+		}
+			
 		
 	}
 	
