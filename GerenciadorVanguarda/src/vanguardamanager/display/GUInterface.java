@@ -311,8 +311,11 @@ public class GUInterface extends JPanel{
 		else if(i == 5)
 			return nf.format(3.00);
 		else if(i == 1)
-			return nf.format(2.00);
-				
+			return nf.format(1.00);
+		else
+			JOptionPane.showMessageDialog(null, "Os quantidades possiveis são"
+					+ "\n         10, 5 ou 1 flecha(s)");
+		
 		return nf.format(0.00);	
 	}
 	
