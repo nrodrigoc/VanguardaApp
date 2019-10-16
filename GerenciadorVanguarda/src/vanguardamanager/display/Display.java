@@ -42,7 +42,7 @@ public class Display extends JFrame{
 		setTitle("Varguada's App");
 		setBounds(0, 0, 975, 675);
 		contentPane = getContentPane();
-		
+		setResizable(false);
 		
 		//Barra de menu
 		mnBarra = new JMenuBar();
