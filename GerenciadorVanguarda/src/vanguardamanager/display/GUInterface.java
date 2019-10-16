@@ -32,7 +32,7 @@ import vanguardamanager.gfx.Assets;
 
 public class GUInterface extends JPanel{
 	
-	private int count;
+	private int itemIndex, btAddYPos;
 	
 	private NumberFormat nf = new DecimalFormat("R$,##0.00");
 	
@@ -65,7 +65,7 @@ public class GUInterface extends JPanel{
 		definirEventos(); 
 		
 		
-		count = 0;
+		itemIndex = 1;
 	}
 	
 	private void iniciarComponentes() {
@@ -203,6 +203,7 @@ public class GUInterface extends JPanel{
 		
 		public EventsHandler() {
 			index = 0;
+			btAddYPos = 235;
 		}
 		
 		@Override
@@ -241,14 +242,11 @@ public class GUInterface extends JPanel{
 	}
 	
 	private class MouseController implements MouseListener{
-
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() instanceof JTextField)
-				nome.setText("");
-			
-			if(e.getSource() == this)
-				JOptionPane.showMessageDialog(null, "Vai tomar no cu tranquilo");
+				nome.setText("Iae Gabriel meu paceruuu");
 			
 		}
 
@@ -279,6 +277,16 @@ public class GUInterface extends JPanel{
 	}
 	
 	private void addComboBox() {
+		if(itemIndex < itensComboBox.size()) {
+			if(btAddYPos < 385)
+				btAddYPos += 50;
+			adicionar.setLocation(487, btAddYPos);
+			itensComboBox.get(itemIndex).setVisible(true);
+			quantidade.get(itemIndex).setVisible(true);
+			valorUnit.get(itemIndex).setVisible(true);
+			itemIndex++;
+		}else
+			adicionar.setVisible(false);
 		
 	}
 	
