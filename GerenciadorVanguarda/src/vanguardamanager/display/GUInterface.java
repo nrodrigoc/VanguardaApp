@@ -32,7 +32,7 @@ import vanguardamanager.gfx.Assets;
 
 public class GUInterface extends JPanel{
 	
-	private int itemIndex, btAddYPos;
+	private int itemIndex, btAddYPos, cliques;
 	
 	private NumberFormat nf = new DecimalFormat("R$,##0.00");
 	
@@ -66,6 +66,7 @@ public class GUInterface extends JPanel{
 		
 		
 		itemIndex = 1;
+		cliques = 0;
 	}
 	
 	private void iniciarComponentes() {
@@ -245,8 +246,11 @@ public class GUInterface extends JPanel{
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(e.getSource() instanceof JTextField)
-				nome.setText("Iae Gabriel meu paceruuu");
+			if(e.getSource() instanceof JTextField && cliques == 0) {
+				nome.setText("");
+				cliques++;
+			}
+				
 			
 		}
 
