@@ -39,6 +39,7 @@ public class Display extends JFrame{
 	}
 
 	private void inicializarComponentes() { 
+		
 		setTitle("Varguada's App");
 		setBounds(0, 0, 975, 675);
 		contentPane = getContentPane();
@@ -46,22 +47,29 @@ public class Display extends JFrame{
 		
 		//Barra de menu
 		mnBarra = new JMenuBar();
-		mnArquivo = new JMenu("Arquivo");
-		mnArquivo.setMnemonic('A');
 		mnExemplos = new JMenu("Teste");
 		mnExemplos.setMnemonic('T');
+		
 		Icon heart = new ImageIcon(getClass().getResource("/images/heart.png"));
-		miSair = new JMenuItem("Sair", heart);
-		miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
+		
+		
 		miSubmenu = new JMenuItem("Secundário");
 		miMain = new JMenuItem("Principal");
 		miMain.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-		mnArquivo.add(miSair);
 		mnExemplos.add(miMain);
 		mnExemplos.add(miSubmenu);
-		mnBarra.add(mnArquivo);
 		mnBarra.add(mnExemplos);
 		setJMenuBar(mnBarra);
+		mnArquivo = new JMenu("Arquivo");
+		mnArquivo.setMnemonic('A');
+		miSair = new JMenuItem("Sair", heart);
+		miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
+		
+		
+		
+		
+		mnArquivo.add(miSair);
+		mnBarra.add(mnArquivo);
 		
 		
 		
@@ -96,7 +104,7 @@ public class Display extends JFrame{
 			
 			else if(e.getSource() == miSubmenu) {
 				GUIComponents submenu = new GUIComponents();
-				System.out.println("Submenu");
+				System.out.println("Testes");
 				contentPane.removeAll();
 				contentPane.add(submenu);
 				contentPane.validate();
@@ -104,7 +112,7 @@ public class Display extends JFrame{
 			
 			else if(e.getSource() == miMain) {
 				GUInterface menu = new GUInterface();
-				System.out.println("Menu");
+				System.out.println("Principal");
 				contentPane.removeAll();
 				contentPane.add(menu);
 				contentPane.validate();

@@ -143,7 +143,7 @@ public class GUInterface extends JPanel{
 		
 		
 		//Caixa de opções das idades
-		ageComboBox = new JComboBox<String>(idades);
+		ageComboBox = new JComboBox<>();
 		ageComboBox.setBounds(350, 115, 200, 30);
 		ageComboBox.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		ageComboBox.setMaximumRowCount(4);

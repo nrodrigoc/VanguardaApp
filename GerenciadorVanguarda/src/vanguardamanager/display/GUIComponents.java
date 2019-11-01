@@ -90,7 +90,7 @@ public class GUIComponents extends JPanel{
 		boldJCheckBox.setBounds(240, 45, 50, 25);
 		italicJCheckBox.setBounds(300, 45, 60, 25);
 		
-		cep.setBounds(200, 90, 250, 25);
+		cep.setBounds(191, 97, 250, 25);
 		rbtPlain.setBounds(185, 120, 60, 25);
 		rbtBold.setBounds(246, 120, 60, 25);
 		rbtItalic.setBounds(306, 120, 60, 25);
