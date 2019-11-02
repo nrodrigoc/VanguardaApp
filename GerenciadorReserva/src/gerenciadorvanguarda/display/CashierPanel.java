@@ -1,6 +1,7 @@
 package gerenciadorvanguarda.display;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -24,16 +25,13 @@ public class CashierPanel extends JPanel{
 	private JLabel lblMaleLabel;
 	
 	private JComboBox<String> ageComboBox;	
-	//private String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
+	private String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
 	private JLabel lblProdutos;
 	
 	
 	public CashierPanel() {
 		setBounds(0, 0, 969, 646);
 		setLayout(null);
-		
-		//idades = new String[4];
-		String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
 		
 		nameField = new JTextField();
 		nameField.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -53,7 +51,8 @@ public class CashierPanel extends JPanel{
 		sexo.add(female);
 		
 		//Lista com idades
-		ageComboBox = new JComboBox<String>(/*idades*/);
+		ageComboBox = new JComboBox<String>();
+		ageComboBox.setModel(new DefaultComboBoxModel<String>(idades)); //Necessario pra editar pelo windowbuilder
 		ageComboBox.setLocation(41, 302);
 		ageComboBox.setSize(200, 30);
 		
