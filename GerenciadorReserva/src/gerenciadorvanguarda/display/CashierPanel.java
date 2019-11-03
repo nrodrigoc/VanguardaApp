@@ -15,6 +15,7 @@ import java.awt.Canvas;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 public class CashierPanel extends JPanel{
 	private JTextField nameField;
@@ -122,5 +123,11 @@ public class CashierPanel extends JPanel{
 		lblValor.setFont(new Font("SansSerif", Font.BOLD, 15));
 		lblValor.setBounds(462, 218, 90, 14);
 		add(lblValor);
+		
+		JButton btnAdd = new JButton("+");
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAdd.setBounds(472, 282, 45, 30);
+		btnAdd.setHorizontalAlignment(SwingConstants.CENTER);
+		add(btnAdd);
 	}
 }
