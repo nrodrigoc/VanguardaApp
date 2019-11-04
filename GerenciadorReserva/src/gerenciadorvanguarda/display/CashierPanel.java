@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class CashierPanel extends JPanel{
 	private JTextField nameField;
@@ -44,8 +45,10 @@ public class CashierPanel extends JPanel{
 	private JLabel idadeLabel;
 	
 	private int nDeValores; //Indice dos valores no array
+	private JButton btnFechar;
 	
 	public CashierPanel() {
+		setBackground(Color.LIGHT_GRAY);
 		setBounds(0, 0, 969, 646);
 		setLayout(null);
 		
@@ -61,10 +64,12 @@ public class CashierPanel extends JPanel{
 		nameField.setBounds(49, 57, 483, 32);
 		
 		male = new JRadioButton("", true);
+		male.setBackground(Color.LIGHT_GRAY);
 		male.setLocation(108, 178);
 		male.setSize(20, 20);
 		
 		female = new JRadioButton("", false);
+		female.setBackground(Color.LIGHT_GRAY);
 		female.setSize(20, 20);
 		female.setLocation(208, 178);
 		
@@ -171,5 +176,42 @@ public class CashierPanel extends JPanel{
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAdd.setHorizontalAlignment(SwingConstants.CENTER);
 		add(btnAdd);
+		
+		JTextField tfValorTotal = new JTextField("Valor total: R$ 0,00");
+		tfValorTotal.setBackground(Color.WHITE);
+		tfValorTotal.setBounds(49, 524, 327, 41);
+		tfValorTotal.setFont(new Font("SansSerif", Font.PLAIN, 22));
+		tfValorTotal.setEditable(false);
+		add(tfValorTotal);
+		
+		JPanel panelFila = new JPanel();
+		panelFila.setBounds(682, 214, 287, 402);
+		panelFila.setVisible(false);
+		add(panelFila);
+		
+		JButton btnFila = new JButton("Fila");
+		btnFila.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(panelFila.isVisible())
+					panelFila.setVisible(false);
+				else
+					panelFila.setVisible(true);
+			}
+		});
+		btnFila.setBounds(682, 616, 300, 30);
+		btnFila.setFont(new Font("SansSerif", Font.PLAIN, 22));
+		add(btnFila);
+		
+		btnFechar = new JButton("");
+		btnFechar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnFechar.setBackground(Color.LIGHT_GRAY);
+		btnFechar.setForeground(Color.LIGHT_GRAY);
+		btnFechar.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/cancel.png")));
+		btnFechar.setBounds(929, 11, 30, 30);
+		add(btnFechar);
 	}
 }
