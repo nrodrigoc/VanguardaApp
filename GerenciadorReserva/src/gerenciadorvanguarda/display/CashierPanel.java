@@ -31,17 +31,15 @@ public class CashierPanel extends JPanel{
 	
 	private JComboBox<String> ageComboBox;	
 	private static final String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
-	
-	private JComboBox<String> itensComboBox;	
+		
 	private static final String[] itens = {"Flecha", "Tiro", "Alvo"};
-	//private ArrayList<JComboBox<String>> cbItensArray;
+	private ArrayList<JComboBox<String>> arrayComboBox;
 	private ArrayList<JTextField> valoresArray;
-	private JTextField tfQuantidade;
-	private JTextField tfValor;
+	private ArrayList<JTextField> quantidadesArray;
 	
-	
-	private JLabel lblProdutos;
 	private JLabel lblQuantidade;
+	private JLabel lblProdutos;
+	
 	private JLabel lblValor;
 	private JLabel idadeLabel;
 	
@@ -53,8 +51,9 @@ public class CashierPanel extends JPanel{
 		
 		nDeValores = 1;
 		
-		//cbItensArray = new ArrayList<JComboBox<String>>();//Utilidade futura provavel
+		arrayComboBox = new ArrayList<JComboBox<String>>();
 		valoresArray = new ArrayList<JTextField>();
+		quantidadesArray = new ArrayList<JTextField>();
 		
 		nameField = new JTextField();
 		nameField.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -72,6 +71,41 @@ public class CashierPanel extends JPanel{
 		sexo = new ButtonGroup();
 		sexo.add(male);
 		sexo.add(female);
+
+		int posYItens = 241; 
+		
+		for(int i = 0; i < 3; i++) {
+			arrayComboBox.add(new JComboBox<String>(itens));
+			arrayComboBox.get(i).setBounds(49, posYItens, 200, 30);
+			arrayComboBox.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
+			arrayComboBox.get(i).setMaximumRowCount(3);
+			
+			quantidadesArray.add(new JTextField()); //Quantidade do produto
+			quantidadesArray.get(i).setBounds(350, posYItens, 70, 30);
+			quantidadesArray.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
+			
+			valoresArray.add(new JTextField("R$ ")); //Valor do produto
+			valoresArray.get(i).setBounds(462, posYItens, 80, 30);
+			valoresArray.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
+			valoresArray.get(i).setEditable(false);
+			valoresArray.get(i).setToolTipText("Valor unitário do produto");
+			valoresArray.get(i).setOpaque(true);
+			
+			posYItens += 60;
+		}
+		
+		for(int i = 1; i < 3; i++) {
+			arrayComboBox.get(i).setVisible(false);
+			quantidadesArray.get(i).setVisible(false);
+			valoresArray.get(i).setVisible(false);
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			add(arrayComboBox.get(i));
+			add(quantidadesArray.get(i));
+			add(valoresArray.get(i));
+		}
+		
 		
 		//Lista com idades
 		ageComboBox = new JComboBox<String>();
@@ -80,23 +114,6 @@ public class CashierPanel extends JPanel{
 		ageComboBox.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		ageComboBox.setMaximumRowCount(4);
 		add(ageComboBox);
-		
-		//Lista com produtos
-		itensComboBox = new JComboBox<String>();
-		itensComboBox.setModel(new DefaultComboBoxModel<String>(itens)); //Necessario pra editar pelo windowbuilder
-		itensComboBox.setBounds(49, 241, 200, 30);
-		itensComboBox.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		itensComboBox.setMaximumRowCount(4);
-		//cbItensArray.add(itensComboBox);
-		add(itensComboBox);
-		
-		tfValor = new JTextField("R$");
-		tfValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		tfValor.setEditable(false);
-		tfValor.setColumns(10);
-		tfValor.setBounds(462, 241, 80, 30);
-		valoresArray.add(tfValor); //Adiciona os valores num array
-		add(tfValor);
 		
 		lblMaleLabel = new JLabel("");
 		lblMaleLabel.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/male.png")));
@@ -117,16 +134,10 @@ public class CashierPanel extends JPanel{
 		add(nameField);
 		add(lblProdutos);
 		
-		
 		idadeLabel = new JLabel("Idade aproximada");
 		idadeLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
 		idadeLabel.setBounds(392, 145, 150, 14);
 		add(idadeLabel);
-		
-		tfQuantidade = new JTextField();
-		tfQuantidade.setBounds(350, 241, 70, 30);
-		add(tfQuantidade);
-		tfQuantidade.setColumns(10);
 		
 		lblQuantidade = new JLabel("Quantidade");
 		lblQuantidade.setFont(new Font("SansSerif", Font.BOLD, 15));
@@ -139,12 +150,16 @@ public class CashierPanel extends JPanel{
 		add(lblValor);
 		
 		JButton btnAdd = new JButton("+");
-		btnAdd.setBounds(478, 282, 54, 30);
-		int posYTfValor = tfValor.getY();
+		btnAdd.setBounds(475, 282, 54, 30);
 		
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(nDeValores < itens.length) { //Se a quantidade de valores for menor que o numero de itens...
+					
+					arrayComboBox.get(nDeValores).setVisible(true);
+					valoresArray.get(nDeValores).setVisible(true);
+					quantidadesArray.get(nDeValores).setVisible(true);
+					
 					btnAdd.setLocation(btnAdd.getX(), btnAdd.getY() + (60*nDeValores));
 					nDeValores++;
 				}
