@@ -13,15 +13,24 @@ import java.util.ArrayList;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.Canvas;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class CashierPanel extends JPanel{
+	
+	private NumberFormat nf = new DecimalFormat("R$,##0.00");
+	
 	private JTextField nameField;
+	private JTextField tfValorTotal;
 	
 	private JRadioButton male;
 	private JRadioButton female;
@@ -46,10 +55,11 @@ public class CashierPanel extends JPanel{
 	
 	private int nDeValores; //Indice dos valores no array
 	private JButton btnFechar;
+	private JButton btnAdd;
 	
 	public CashierPanel() {
 		setBackground(Color.LIGHT_GRAY);
-		setBounds(0, 0, 969, 646);
+		setBounds(0, 0, 979, 676);
 		setLayout(null);
 		
 		nDeValores = 1;
@@ -71,7 +81,7 @@ public class CashierPanel extends JPanel{
 		female = new JRadioButton("", false);
 		female.setBackground(Color.LIGHT_GRAY);
 		female.setSize(20, 20);
-		female.setLocation(208, 178);
+		female.setLocation(187, 178);
 		
 		sexo = new ButtonGroup();
 		sexo.add(male);
@@ -127,7 +137,7 @@ public class CashierPanel extends JPanel{
 		
 		lblFemLabel = new JLabel("");
 		lblFemLabel.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/female.png")));
-		lblFemLabel.setBounds(194, 120, 54, 54);
+		lblFemLabel.setBounds(173, 120, 54, 54);
 		add(lblFemLabel);
 		
 		lblProdutos = new JLabel("Produto");
@@ -154,7 +164,7 @@ public class CashierPanel extends JPanel{
 		lblValor.setBounds(462, 218, 90, 14);
 		add(lblValor);
 		
-		JButton btnAdd = new JButton("+");
+		btnAdd = new JButton("+");
 		btnAdd.setBounds(475, 282, 54, 30);
 		
 		btnAdd.addActionListener(new ActionListener() {
@@ -177,15 +187,15 @@ public class CashierPanel extends JPanel{
 		btnAdd.setHorizontalAlignment(SwingConstants.CENTER);
 		add(btnAdd);
 		
-		JTextField tfValorTotal = new JTextField("Valor total: R$ 0,00");
+		tfValorTotal = new JTextField("Valor total: R$ 0,00");
 		tfValorTotal.setBackground(Color.WHITE);
-		tfValorTotal.setBounds(49, 524, 327, 41);
+		tfValorTotal.setBounds(49, 548, 327, 41);
 		tfValorTotal.setFont(new Font("SansSerif", Font.PLAIN, 22));
 		tfValorTotal.setEditable(false);
 		add(tfValorTotal);
 		
 		JPanel panelFila = new JPanel();
-		panelFila.setBounds(682, 214, 287, 402);
+		panelFila.setBounds(682, 238, 287, 402);
 		panelFila.setVisible(false);
 		add(panelFila);
 		
@@ -198,7 +208,7 @@ public class CashierPanel extends JPanel{
 					panelFila.setVisible(true);
 			}
 		});
-		btnFila.setBounds(682, 616, 300, 30);
+		btnFila.setBounds(682, 640, 287, 30);
 		btnFila.setFont(new Font("SansSerif", Font.PLAIN, 22));
 		add(btnFila);
 		
@@ -208,10 +218,71 @@ public class CashierPanel extends JPanel{
 				System.exit(0);
 			}
 		});
+		
+		btnFechar.setMnemonic('W');
 		btnFechar.setBackground(Color.LIGHT_GRAY);
 		btnFechar.setForeground(Color.LIGHT_GRAY);
 		btnFechar.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/cancel.png")));
 		btnFechar.setBounds(929, 11, 30, 30);
 		add(btnFechar);
+		
+		definirEventos();
+	}
+	
+	private void definirEventos() {
+		EventsHandler handler = new EventsHandler();
+		for(int i = 0; i < 3; i++) {
+			quantidadesArray.get(i).addActionListener(handler);
+		}
+		
+	}
+	
+	private String verificarCombosFlecha(int i) {
+		if(i == 10)
+			return nf.format(5.00);
+		else if(i == 5)
+			return nf.format(3.00);
+		else if(i == 1)
+			return nf.format(1.00);
+		else
+			JOptionPane.showMessageDialog(null, "Os quantidades possiveis são"
+					+ "\n         10, 5 ou 1 flecha(s)");
+		
+		return nf.format(0.00);	
+	}
+	
+	private class EventsHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if(e.getSource() == quantidadesArray.get(2))
+				tfValorTotal.setText("bom dia");
+			
+			
+			for(int i = 0; i < 3; i++) {
+				if(e.getSource() == quantidadesArray.get(i) && !quantidadesArray.get(i).getText().isEmpty()){
+					if(!isAlpha(quantidadesArray.get(i).getText()))
+						valoresArray.get(i).setText(verificarCombosFlecha(Integer.parseInt(quantidadesArray.get(i).getText())));
+					else
+					 JOptionPane.showMessageDialog(null, "              Por favor\n Digite apenas números");
+				
+				}
+			}
+			
+		}
+		
+	}
+	
+	public static boolean isAlpha(String name) {
+	    char[] chars = name.toCharArray();
+
+	    for (char c : chars) {
+	        if(Character.isLetter(c)) {
+	            return true;
+	        }
+	    }
+
+	    return false;
 	}
 }
