@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CashierPanel extends JPanel{
 	private JTextField nameField;
@@ -28,21 +30,31 @@ public class CashierPanel extends JPanel{
 	private JLabel lblMaleLabel;
 	
 	private JComboBox<String> ageComboBox;	
-	private String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
+	private static final String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
 	
 	private JComboBox<String> itensComboBox;	
 	private static final String[] itens = {"Flecha", "Tiro", "Alvo"};
+	//private ArrayList<JComboBox<String>> cbItensArray;
+	private ArrayList<JTextField> valoresArray;
+	private JTextField tfQuantidade;
+	private JTextField tfValor;
+	
 	
 	private JLabel lblProdutos;
-	private JTextField textField;
 	private JLabel lblQuantidade;
-	private JTextField tfValor;
 	private JLabel lblValor;
+	private JLabel idadeLabel;
 	
+	private int nDeValores; //Indice dos valores no array
 	
 	public CashierPanel() {
 		setBounds(0, 0, 969, 646);
 		setLayout(null);
+		
+		nDeValores = 1;
+		
+		//cbItensArray = new ArrayList<JComboBox<String>>();//Utilidade futura provavel
+		valoresArray = new ArrayList<JTextField>();
 		
 		nameField = new JTextField();
 		nameField.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -75,7 +87,16 @@ public class CashierPanel extends JPanel{
 		itensComboBox.setBounds(49, 241, 200, 30);
 		itensComboBox.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		itensComboBox.setMaximumRowCount(4);
+		//cbItensArray.add(itensComboBox);
 		add(itensComboBox);
+		
+		tfValor = new JTextField("R$");
+		tfValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		tfValor.setEditable(false);
+		tfValor.setColumns(10);
+		tfValor.setBounds(462, 241, 80, 30);
+		valoresArray.add(tfValor); //Adiciona os valores num array
+		add(tfValor);
 		
 		lblMaleLabel = new JLabel("");
 		lblMaleLabel.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/male.png")));
@@ -97,27 +118,20 @@ public class CashierPanel extends JPanel{
 		add(lblProdutos);
 		
 		
-		JLabel idadeLabel = new JLabel("Idade aproximada");
+		idadeLabel = new JLabel("Idade aproximada");
 		idadeLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
 		idadeLabel.setBounds(392, 145, 150, 14);
 		add(idadeLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(350, 241, 70, 30);
-		add(textField);
-		textField.setColumns(10);
+		tfQuantidade = new JTextField();
+		tfQuantidade.setBounds(350, 241, 70, 30);
+		add(tfQuantidade);
+		tfQuantidade.setColumns(10);
 		
 		lblQuantidade = new JLabel("Quantidade");
 		lblQuantidade.setFont(new Font("SansSerif", Font.BOLD, 15));
 		lblQuantidade.setBounds(350, 218, 90, 14);
 		add(lblQuantidade);
-		
-		tfValor = new JTextField("R$");
-		tfValor.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		tfValor.setEditable(false);
-		tfValor.setColumns(10);
-		tfValor.setBounds(462, 241, 70, 30);
-		add(tfValor);
 		
 		lblValor = new JLabel("Valor");
 		lblValor.setFont(new Font("SansSerif", Font.BOLD, 15));
@@ -125,8 +139,21 @@ public class CashierPanel extends JPanel{
 		add(lblValor);
 		
 		JButton btnAdd = new JButton("+");
+		btnAdd.setBounds(478, 282, 54, 30);
+		int posYTfValor = tfValor.getY();
+		
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(nDeValores < itens.length) { //Se a quantidade de valores for menor que o numero de itens...
+					btnAdd.setLocation(btnAdd.getX(), btnAdd.getY() + (60*nDeValores));
+					nDeValores++;
+				}
+				if (nDeValores == 3)
+					btnAdd.setVisible(false);
+				
+			}
+		});
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAdd.setBounds(472, 282, 45, 30);
 		btnAdd.setHorizontalAlignment(SwingConstants.CENTER);
 		add(btnAdd);
 	}
