@@ -24,10 +24,15 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
 
 public class CashierPanel extends JPanel{
 	
 	private NumberFormat nf = new DecimalFormat("R$,##0.00");
+	
+	private RowPanel rowPanel;
 	
 	private JTextField nameField;
 	private JTextField tfValorTotal;
@@ -53,7 +58,7 @@ public class CashierPanel extends JPanel{
 	private JLabel lblValor;
 	private JLabel idadeLabel;
 	
-	private int nDeValores; //Indice dos valores no array
+	private int nDeValores, nameClicks; //Indice dos valores no array
 	private JButton btnFechar;
 	private JButton btnAdd;
 	
@@ -63,15 +68,29 @@ public class CashierPanel extends JPanel{
 		setLayout(null);
 		
 		nDeValores = 1;
+		nameClicks = 0;
 		
 		arrayComboBox = new ArrayList<JComboBox<String>>();
 		valoresArray = new ArrayList<JTextField>();
 		quantidadesArray = new ArrayList<JTextField>();
 		
 		nameField = new JTextField();
-		nameField.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		nameField.setForeground(SystemColor.textInactiveText);
+		nameField.setText("  Nome do cliente");
+		nameField.setFont(new Font("SansSerif", Font.BOLD, 17));
 		nameField.setHorizontalAlignment(SwingConstants.LEFT);
 		nameField.setBounds(49, 57, 483, 32);
+		nameField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(nameClicks == 0) {
+					nameField.setText("");
+					nameField.setFont(new Font("SansSerif", Font.PLAIN + Font.BOLD, 17));
+					nameField.setForeground(Color.BLACK);
+					nameClicks++;
+				}
+			}
+		});
 		
 		male = new JRadioButton("", true);
 		male.setBackground(Color.LIGHT_GRAY);
@@ -189,23 +208,21 @@ public class CashierPanel extends JPanel{
 		
 		tfValorTotal = new JTextField("Valor total: R$ 0,00");
 		tfValorTotal.setBackground(Color.WHITE);
-		tfValorTotal.setBounds(49, 548, 327, 41);
+		tfValorTotal.setBounds(49, 548, 287, 41);
 		tfValorTotal.setFont(new Font("SansSerif", Font.PLAIN, 22));
 		tfValorTotal.setEditable(false);
 		add(tfValorTotal);
 		
-		JPanel panelFila = new JPanel();
-		panelFila.setBounds(682, 238, 287, 402);
-		panelFila.setVisible(false);
-		add(panelFila);
+		rowPanel = new RowPanel();
+		add(rowPanel);
 		
 		JButton btnFila = new JButton("Fila");
 		btnFila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(panelFila.isVisible())
-					panelFila.setVisible(false);
+				if(rowPanel.isVisible())
+					rowPanel.setVisible(false);
 				else
-					panelFila.setVisible(true);
+					rowPanel.setVisible(true);
 			}
 		});
 		btnFila.setBounds(682, 640, 287, 30);
@@ -225,6 +242,14 @@ public class CashierPanel extends JPanel{
 		btnFechar.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/cancel.png")));
 		btnFechar.setBounds(929, 11, 30, 30);
 		add(btnFechar);
+		
+		JButton btnConfirma = new JButton("GO");
+		btnConfirma.setBounds(376, 548, 90, 41);
+		add(btnConfirma);
+		
+		JButton btnCancela = new JButton("CANCEL");
+		btnCancela.setBounds(476, 548, 90, 41);
+		add(btnCancela);
 		
 		definirEventos();
 	}
