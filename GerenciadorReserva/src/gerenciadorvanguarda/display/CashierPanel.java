@@ -3,6 +3,7 @@ package gerenciadorvanguarda.display;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -10,8 +11,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.JRadioButtonMenuItem;
-import java.awt.Canvas;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
@@ -245,6 +244,27 @@ public class CashierPanel extends JPanel{
 		
 		JButton btnConfirma = new JButton("GO");
 		btnConfirma.setBounds(376, 548, 90, 41);
+		btnConfirma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i = 0; i < 3; i++) {
+					if(!nameField.getText().isEmpty() && !quantidadesArray.get(i).getText().isEmpty()) {
+						System.out.println("Teste de envio 1");
+						if(arrayComboBox.get(i).getSelectedIndex() == 0 && !isAlpha(quantidadesArray.get(i).getText())) {
+							System.out.println("Teste de envio 2");
+							String nome = nameField.getText();
+							int quantidade = Integer.parseInt(quantidadesArray.get(i).getText());
+							rowPanel.addToRow(nome, quantidade);
+							break;
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "  Campos \"Nome do cliente\" ou "
+								+ "\nquantidade de flechas inválidos!" + i);
+						break;
+					}
+					
+				}
+			}
+		});
 		add(btnConfirma);
 		
 		JButton btnCancela = new JButton("CANCEL");
@@ -281,7 +301,7 @@ public class CashierPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			if(e.getSource() == quantidadesArray.get(2))
+			if(e.getSource() == quantidadesArray.get(0))
 				tfValorTotal.setText("bom dia");
 			
 			
