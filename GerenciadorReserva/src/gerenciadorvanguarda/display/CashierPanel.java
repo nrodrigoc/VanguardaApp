@@ -45,11 +45,13 @@ public class CashierPanel extends JPanel{
 	
 	private JComboBox<String> ageComboBox;	
 	private static final String[] idades = {"+18 anos", "13 a 17 anos", "6 até 12 anos", "5 anos ou menos"};
-		
 	private static final String[] itens = {"Flecha", "Tiro", "Alvo"};
-	private ArrayList<JComboBox<String>> arrayComboBox;
+	private static final Integer[] qntdFlechas = {10, 5, 1};
+	
+	//CB = COMBO BOX
+	private ArrayList<JComboBox<String>> arrayCBProdutos;
+	private ArrayList<JComboBox<Integer>> arrayCBQuantidades;
 	private ArrayList<JTextField> valoresArray;
-	private ArrayList<JTextField> quantidadesArray;
 	
 	private JLabel lblQuantidade;
 	private JLabel lblProdutos;
@@ -69,9 +71,9 @@ public class CashierPanel extends JPanel{
 		nDeValores = 1;
 		nameClicks = 0;
 		
-		arrayComboBox = new ArrayList<JComboBox<String>>();
+		arrayCBProdutos = new ArrayList<JComboBox<String>>();
 		valoresArray = new ArrayList<JTextField>();
-		quantidadesArray = new ArrayList<JTextField>();
+		arrayCBQuantidades = new ArrayList<JComboBox<Integer>>();
 		
 		nameField = new JTextField();
 		nameField.setForeground(SystemColor.textInactiveText);
@@ -108,14 +110,14 @@ public class CashierPanel extends JPanel{
 		int posYItens = 241; 
 		
 		for(int i = 0; i < 3; i++) {
-			arrayComboBox.add(new JComboBox<String>(itens));
-			arrayComboBox.get(i).setBounds(49, posYItens, 200, 30);
-			arrayComboBox.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
-			arrayComboBox.get(i).setMaximumRowCount(3);
+			arrayCBProdutos.add(new JComboBox<String>(itens));
+			arrayCBProdutos.get(i).setBounds(49, posYItens, 200, 30);
+			arrayCBProdutos.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
+			arrayCBProdutos.get(i).setMaximumRowCount(3);
 			
-			quantidadesArray.add(new JTextField()); //Quantidade do produto
-			quantidadesArray.get(i).setBounds(350, posYItens, 70, 30);
-			quantidadesArray.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
+			arrayCBQuantidades.add(new JComboBox<Integer>(qntdFlechas)); //Quantidade do produto
+			arrayCBQuantidades.get(i).setBounds(350, posYItens, 70, 30);
+			arrayCBQuantidades.get(i).setFont(new Font("SansSerif", Font.PLAIN, 15));
 			
 			valoresArray.add(new JTextField("R$ ")); //Valor do produto
 			valoresArray.get(i).setBounds(462, posYItens, 80, 30);
@@ -128,14 +130,14 @@ public class CashierPanel extends JPanel{
 		}
 		
 		for(int i = 1; i < 3; i++) {
-			arrayComboBox.get(i).setVisible(false);
-			quantidadesArray.get(i).setVisible(false);
+			arrayCBProdutos.get(i).setVisible(false);
+			arrayCBQuantidades.get(i).setVisible(false);
 			valoresArray.get(i).setVisible(false);
 		}
 		
 		for(int i = 0; i < 3; i++) {
-			add(arrayComboBox.get(i));
-			add(quantidadesArray.get(i));
+			add(arrayCBProdutos.get(i));
+			add(arrayCBQuantidades.get(i));
 			add(valoresArray.get(i));
 		}
 		
@@ -189,9 +191,9 @@ public class CashierPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if(nDeValores < itens.length) { //Se a quantidade de valores for menor que o numero de itens...
 					
-					arrayComboBox.get(nDeValores).setVisible(true);
+					arrayCBProdutos.get(nDeValores).setVisible(true);
 					valoresArray.get(nDeValores).setVisible(true);
-					quantidadesArray.get(nDeValores).setVisible(true);
+					arrayCBQuantidades.get(nDeValores).setVisible(true);
 					
 					btnAdd.setLocation(btnAdd.getX(), btnAdd.getY() + (60*nDeValores));
 					nDeValores++;
@@ -247,12 +249,12 @@ public class CashierPanel extends JPanel{
 		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for(int i = 0; i < 3; i++) {
-					if(!nameField.getText().isEmpty() && !quantidadesArray.get(i).getText().isEmpty()) {
+					if(!nameField.getText().isEmpty()) {
 						System.out.println("Teste de envio 1");
-						if(arrayComboBox.get(i).getSelectedIndex() == 0 && !isAlpha(quantidadesArray.get(i).getText())) {
+						if(arrayCBProdutos.get(i).getSelectedIndex() == 0) {
 							System.out.println("Teste de envio 2");
 							String nome = nameField.getText();
-							int quantidade = Integer.parseInt(quantidadesArray.get(i).getText());
+							int quantidade = (int) arrayCBQuantidades.get(i).getSelectedItem();
 							rowPanel.addToRow(nome, quantidade);
 							break;
 						}
@@ -277,9 +279,8 @@ public class CashierPanel extends JPanel{
 	private void definirEventos() {
 		EventsHandler handler = new EventsHandler();
 		for(int i = 0; i < 3; i++) {
-			quantidadesArray.get(i).addActionListener(handler);
+			arrayCBQuantidades.get(i).addActionListener(handler);
 		}
-		
 	}
 	
 	private String verificarCombosFlecha(int i) {
@@ -289,9 +290,6 @@ public class CashierPanel extends JPanel{
 			return nf.format(3.00);
 		else if(i == 1)
 			return nf.format(1.00);
-		else
-			JOptionPane.showMessageDialog(null, "Os quantidades possiveis são"
-					+ "\n         10, 5 ou 1 flecha(s)");
 		
 		return nf.format(0.00);	
 	}
@@ -300,21 +298,12 @@ public class CashierPanel extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			if(e.getSource() == quantidadesArray.get(0))
-				tfValorTotal.setText("bom dia");
-			
-			
 			for(int i = 0; i < 3; i++) {
-				if(e.getSource() == quantidadesArray.get(i) && !quantidadesArray.get(i).getText().isEmpty()){
-					if(!isAlpha(quantidadesArray.get(i).getText()))
-						valoresArray.get(i).setText(verificarCombosFlecha(Integer.parseInt(quantidadesArray.get(i).getText())));
-					else
-					 JOptionPane.showMessageDialog(null, "              Por favor\n Digite apenas números");
+				if(e.getSource() == arrayCBQuantidades.get(i)){
+						valoresArray.get(i).setText(verificarCombosFlecha((int) (arrayCBQuantidades.get(i).getSelectedItem())));
 				
 				}
 			}
-			
 		}
 		
 	}
