@@ -249,7 +249,7 @@ public class CashierPanel extends JPanel{
 		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for(int i = 0; i < 3; i++) {
-					if(!nameField.getText().isEmpty()) {
+					if(!nameField.getText().isEmpty() && !nameField.getText().equalsIgnoreCase("  Nome do cliente")) {
 						System.out.println("Teste de envio 1");
 						if(arrayCBProdutos.get(i).getSelectedIndex() == 0) {
 							System.out.println("Teste de envio 2");

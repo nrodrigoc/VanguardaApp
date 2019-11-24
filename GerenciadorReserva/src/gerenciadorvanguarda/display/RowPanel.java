@@ -34,6 +34,7 @@ public class RowPanel extends JPanel{
 		setLayout(null);
 		setVisible(false);
 		
+		individuals = new ArrayList<String>();
 		disparosHash = new HashMap<String, Integer>();
 		
 		positionsNumber = new ArrayList<JTextField>();
