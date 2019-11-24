@@ -260,7 +260,7 @@ public class CashierPanel extends JPanel{
 						}
 					}else {
 						JOptionPane.showMessageDialog(null, "  Campos \"Nome do cliente\" ou "
-								+ "\nquantidade de flechas inválidos!" + i);
+								+ "\nquantidade de flechas inválidos.");
 						break;
 					}
 					
