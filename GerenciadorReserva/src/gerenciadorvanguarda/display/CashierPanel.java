@@ -278,6 +278,7 @@ public class CashierPanel extends JPanel{
 	
 	private void definirEventos() {
 		EventsHandler handler = new EventsHandler();
+		btnAdd.addActionListener(handler);
 		for(int i = 0; i < 3; i++) {
 			arrayCBQuantidades.get(i).addActionListener(handler);
 		}
@@ -299,7 +300,7 @@ public class CashierPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			for(int i = 0; i < 3; i++) {
-				if(e.getSource() == arrayCBQuantidades.get(i)){
+				if(e.getSource() == arrayCBQuantidades.get(i) || e.getSource() == btnAdd){
 						valoresArray.get(i).setText(verificarCombosFlecha((int) (arrayCBQuantidades.get(i).getSelectedItem())));
 				
 				}
