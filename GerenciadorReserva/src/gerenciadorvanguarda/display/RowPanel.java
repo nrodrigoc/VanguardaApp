@@ -92,16 +92,20 @@ public class RowPanel extends JPanel{
 		add(lblDisparos1);
 		
 		txtDisparos2 = new JTextField();
+		txtDisparos2.setEnabled(false);
 		txtDisparos2.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDisparos2.setBounds(173, 300, 75, 25);
 		add(txtDisparos2);
+		txtDisparos2.setOpaque(true);
 		txtDisparos2.setColumns(10);
 		
 		txtDisparos1 = new JTextField();
+		txtDisparos1.setEnabled(false);
 		txtDisparos1.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDisparos1.setColumns(10);
 		txtDisparos1.setBounds(173, 366, 75, 25);
 		add(txtDisparos1);
+		txtDisparos1.setOpaque(true);
 		
 		txtInstrutorB = new JTextField();
 		txtInstrutorB.setEditable(false);

@@ -31,8 +31,6 @@ public class CashierPanel extends JPanel{
 	
 	private NumberFormat nf = new DecimalFormat("R$,##0.00");
 	
-	private RowPanel rowPanel;
-	
 	private JTextField nameField;
 	private JTextField tfValorTotal;
 	
@@ -60,7 +58,6 @@ public class CashierPanel extends JPanel{
 	private JLabel idadeLabel;
 	
 	private int nDeValores, nameClicks; //Indice dos valores no array
-	private JButton btnFechar;
 	private JButton btnAdd;
 	
 	public CashierPanel() {
@@ -214,65 +211,6 @@ public class CashierPanel extends JPanel{
 		tfValorTotal.setEditable(false);
 		add(tfValorTotal);
 		
-		rowPanel = new RowPanel();
-		add(rowPanel);
-		
-		JButton btnFila = new JButton("Fila");
-		btnFila.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(rowPanel.isVisible())
-					rowPanel.setVisible(false);
-				else
-					rowPanel.setVisible(true);
-			}
-		});
-		btnFila.setBounds(682, 640, 287, 30);
-		btnFila.setFont(new Font("SansSerif", Font.PLAIN, 22));
-		add(btnFila);
-		
-		btnFechar = new JButton("");
-		btnFechar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		btnFechar.setMnemonic('W');
-		btnFechar.setBackground(Color.LIGHT_GRAY);
-		btnFechar.setForeground(Color.LIGHT_GRAY);
-		btnFechar.setIcon(new ImageIcon(CashierPanel.class.getResource("/images/cancel.png")));
-		btnFechar.setBounds(929, 11, 30, 30);
-		add(btnFechar);
-		
-		JButton btnConfirma = new JButton("GO");
-		btnConfirma.setBounds(376, 548, 90, 41);
-		btnConfirma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for(int i = 0; i < 3; i++) {
-					if(!nameField.getText().isEmpty() && !nameField.getText().equalsIgnoreCase("  Nome do cliente")) {
-						System.out.println("Teste de envio 1");
-						if(arrayCBProdutos.get(i).getSelectedIndex() == 0) {
-							System.out.println("Teste de envio 2");
-							String nome = nameField.getText();
-							int quantidade = (int) arrayCBQuantidades.get(i).getSelectedItem();
-							rowPanel.addToRow(nome, quantidade);
-							break;
-						}
-					}else {
-						JOptionPane.showMessageDialog(null, "  Campos \"Nome do cliente\" ou "
-								+ "\nquantidade de flechas inválidos.");
-						break;
-					}
-					
-				}
-			}
-		});
-		add(btnConfirma);
-		
-		JButton btnCancela = new JButton("CANCEL");
-		btnCancela.setBounds(476, 548, 90, 41);
-		add(btnCancela);
-		
 		definirEventos();
 	}
 	
@@ -307,6 +245,19 @@ public class CashierPanel extends JPanel{
 			}
 		}
 		
+	}
+	
+	
+	public String getClientName() {
+		return nameField.getText();
+	}
+	
+	public ArrayList<JComboBox<String>> getArrayProdutos(){
+		return arrayCBProdutos;
+	}
+	
+	public ArrayList<JComboBox<Integer>> getArrayQuantidades(){
+		return arrayCBQuantidades;
 	}
 	
 	public static boolean isAlpha(String name) {
